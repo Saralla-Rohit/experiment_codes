@@ -559,10 +559,11 @@ import java.util.*;
 public class Main {    
     public static void main(String[] args) {
         ArrayList<Optional<String>>al=new ArrayList<>();
-
-        for(int i=0;i<3;i++){
+        int n=Integer.parseInt(IO.readln());
+        for(int i=0;i<n;i++){
             al.add(Optional.ofNullable(IO.readln()));
         }
+
         al.forEach(op -> IO.println(op.orElse("null")));
 
     }
