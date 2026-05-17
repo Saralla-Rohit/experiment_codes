@@ -555,16 +555,41 @@
 
 //     }
 // }
+// import java.util.*;
+// public class Main {    
+//     public static void main(String[] args) {
+//         ArrayList<Optional<String>>al=new ArrayList<>();
+//         int n=Integer.parseInt(IO.readln());
+//         for(int i=0;i<n;i++){
+//             al.add(Optional.ofNullable(IO.readln()));
+//         }
+
+//         al.forEach(op -> IO.println(op.orElse("null")));
+
+//     }
+// }
 import java.util.*;
-public class Main {    
+class Main {
+    static int staticCount = 0;
+    int instanceCount = 0;
+    
+    void increment() {
+        staticCount++;
+        instanceCount++;
+    }    
+    void display(){
+        System.out.println("Static: " + staticCount + ", Instance: " + instanceCount);
+
+    }
     public static void main(String[] args) {
-        ArrayList<Optional<String>>al=new ArrayList<>();
-        int n=Integer.parseInt(IO.readln());
-        for(int i=0;i<n;i++){
-            al.add(Optional.ofNullable(IO.readln()));
-        }
+        Main obj1 = new Main();
+        Main obj2 = new Main();
+        obj1.increment();// Static: 1, Instance: 1
+        obj1.increment();// Static: 2, Instance: 2
+        obj2.increment();// Static: 3, Instance: 1
 
-        al.forEach(op -> IO.println(op.orElse("null")));
 
+        obj1.display();//Static: 3, Instance: 2
+        obj2.display();// Static: 3, Instance: 1
     }
 }
