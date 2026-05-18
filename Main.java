@@ -1,17 +1,22 @@
 package com.rohit;
 import java.util.*;
-
 class Main {
-    void rem(){
-        IO.println("rem");
+    int x;
+    {
+        IO.println(this.x);
+        this.x=10;
+        IO.println(this.x);
     }
-    static void rem1(){
-        IO.println("rem1");
+    Main(){
+        this.x=20;
+        IO.println(this.x);
     }
     public static void main(String[] args) {
-        Main m=new Main();
-        m.rem();
-        m.rem1();//still allowed
-        Main.rem1();//recommended
+       Main m=new Main();
     }
 }
+/*
+0
+10
+20
+*/
