@@ -1,0 +1,72 @@
+In Java, the equals() method has a strict contract (rule set) defined in java.lang.Object. Any correct implementation must follow these rules:
+
+🔷 1. Reflexive
+
+An object must be equal to itself.
+
+a.equals(a) → true
+🔷 2. Symmetric
+
+If one object is equal to another, the reverse must also be true.
+
+a.equals(b) → true  ⇒  b.equals(a) → true
+
+👉 Example violation (bad design): if A.equals(B) is true but B.equals(A) is false, logic breaks in collections.
+
+🔷 3. Transitive
+
+If one object equals a second, and the second equals a third, then first must equal third.
+
+a.equals(b) → true  
+b.equals(c) → true  
+⇒ a.equals(c) → true
+🔷 4. Consistent
+
+Repeated calls must give same result if nothing changes.
+
+a.equals(b) → always same result unless data changes
+🔷 5. Null comparison
+
+Any object compared with null must return false.
+
+a.equals(null) → false
+🔷 6. Contract with hashCode (VERY IMPORTANT)
+
+If two objects are equal according to equals(), then:
+
+a.equals(b) → true  ⇒  a.hashCode() == b.hashCode()
+
+But reverse is NOT required:
+
+same hashCode ≠ equals (can still be false)
+🔥 Why this matters
+
+These rules ensure correct behavior in:
+
+HashSet
+HashMap
+Hashtable
+
+If you break any rule → collections behave incorrectly (duplicate entries, missing lookups, etc.)
+class Student {
+    int id;
+
+    Student(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Student s = (Student) obj;
+        return this.id == s.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+}
+👉 equals() defines logical equality, not reference equality
+👉 Must always follow the 5 rules + hashCode contract
