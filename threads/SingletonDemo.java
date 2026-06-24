@@ -1,25 +1,40 @@
 package threads;
+// class Demo{};
+// public class SingletonDemo{
+//     public static void main(String[] args) {
+//         Singleton s=Singleton.getInstance();
+//         Singleton s1=Singleton.getInstance();
 
-public class SingletonDemo {
+//         IO.println(s);
+//         IO.println(s1);
+
+//     }
+// }
+// class Singleton{
+//     private Singleton(){}
+//     private static Singleton instance=new Singleton();
+//     public static  Singleton getInstance(){
+//         return instance;
+//     }
+// }
+public class SingletonDemo{
     public static void main(String[] args) {
-        // Two threads trying to get the instance simultaneously
-        Runnable task = () -> {
-            Singleton s = Singleton.getInstance();
-            System.out.println(Thread.currentThread().getName() + " -> " + s);
+        // SingleTon s2=SingleTon.getInstance();
+        Runnable task = () ->{
+            SingleTon s1=SingleTon.getInstance();
+            IO.println(Thread.currentThread().getName()+"->"+s1);
         };
         new Thread(task).start();
         new Thread(task).start();
     }
 }
-
-class Singleton {
-    private static volatile Singleton instance;
-    private Singleton() { }
-    public static Singleton getInstance() {
-        if (instance == null) {
-            synchronized (Singleton.class) {
-                if (instance == null)
-                    instance = new Singleton();
+class SingleTon{
+    private volatile static SingleTon instance;
+    private SingleTon(){}
+    public static SingleTon getInstance(){
+        synchronized(SingleTon.class){
+            if(instance==null){
+                instance =new SingleTon();
             }
         }
         return instance;

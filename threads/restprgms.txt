@@ -14,6 +14,7 @@ public class SingletonDemo {
     }
 }
 
+
 class Singleton {
     private static volatile Singleton instance;
     private Singleton() { }
